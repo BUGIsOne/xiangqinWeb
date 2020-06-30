@@ -1,0 +1,14 @@
+<?xml version="1.0" encoding="UTF-8"?>  
+<!DOCTYPE mapper PUBLIC "-//mybatis.org//DTD Mapper 3.0//EN"   
+"http://mybatis.org/dtd/mybatis-3-mapper.dtd">  
+<mapper namespace="com.fdream.mapper.SmsMapper">
+	
+    <insert id="save" parameterType="Sms">
+		insert into sms values(#{sid},#{sconte},#{uid_a},#{uid_b},#{screatedate})
+	</insert>
+	
+	<select id="findList" resultType="Sms"> 
+		select * from sms where 1=1 and uid_a=#{uid_a}  order by screatedate desc
+	</select>
+	
+</mapper> 

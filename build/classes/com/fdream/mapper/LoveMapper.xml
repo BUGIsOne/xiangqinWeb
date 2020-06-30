@@ -1,0 +1,32 @@
+<?xml version="1.0" encoding="UTF-8"?>  
+<!DOCTYPE mapper PUBLIC "-//mybatis.org//DTD Mapper 3.0//EN"   
+"http://mybatis.org/dtd/mybatis-3-mapper.dtd">  
+<mapper namespace="com.fdream.mapper.LoveMapper">
+	
+    <insert id="save" parameterType="Love">
+		insert into love values(#{lid},#{uid_a},#{uid_b})
+	</insert>
+	
+	<select id="findList" resultType="Love"> 
+		select * from love where 1=1 
+	</select>
+	
+	<select id="findListBy_Uid" resultType="Love"> 
+		select * from love where 1=1 and uid_a =#{uid_a}
+		<!-- select * from love  a LEFT JOIN umuser b on a.uid_b =b.uid 
+			where 1=1 and a.uid_a =#{uid_a} -->
+	</select>
+	
+	<select id="findIsLove" resultType="Love"> 
+		select * from love where 1=1 and uid_a =#{uid_a} and uid_b =#{uid_b}
+	</select>
+	
+	<select id="findById" parameterType="int" resultType="Love">
+		select * from love where lid=#{lid}
+	</select>
+	
+	<delete id="delete" parameterType="Love">
+		delete from love where lid=#{lid}
+	</delete>
+	
+</mapper> 

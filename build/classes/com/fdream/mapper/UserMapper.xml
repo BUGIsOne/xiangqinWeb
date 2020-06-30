@@ -1,0 +1,62 @@
+<?xml version="1.0" encoding="UTF-8"?>  
+<!DOCTYPE mapper PUBLIC "-//mybatis.org//DTD Mapper 3.0//EN"   
+"http://mybatis.org/dtd/mybatis-3-mapper.dtd">  
+<mapper namespace="com.fdream.mapper.UserMapper">
+	
+    <insert id="save" parameterType="User">
+		insert into umuser values(#{uid},#{img},#{uname},#{fullname},#{password},#{sex},#{age},#{email},#{taste},#{address},#{phone},#{rid},#{lovenum})
+	</insert>
+
+	<select id="htlogin" resultType="User"> 
+		select * from umuser as u
+		 where 1=1 and u.uname = #{0} and u.password=#{1} and u.rid = '管理员'
+	</select>
+	
+	<select id="qtlogin" resultType="User"> 
+		select * from umuser as u
+		 where 1=1 and u.uname = #{0} and u.password=#{1} and u.rid = '会员'
+	</select>
+	
+	<select id="findList" resultType="User"> 
+		select * from umuser where 1=1 
+	</select>
+	
+	<select id="findListTop" resultType="User"> 
+		select * from umuser where 1=1 and rid = '会员' order by lovenum desc limit 0,3
+	</select>
+	
+	<select id="findListByTJ" resultType="User"> 
+		select * from umuser where 1=1 and rid = '会员' 
+		<if test="sex!=''">
+               and sex=#{sex}
+        </if>
+        <if test="qx!=''">
+               and taste like CONCAT('%',#{qx},'%')
+        </if>
+	</select>
+	
+	<select id="findById" parameterType="int" resultType="User">
+		select * from umuser where uid=#{uid}
+	</select>
+	
+	<update id="update" parameterType="User">
+		update umuser set 
+		img =#{img},
+		fullname=#{fullname},
+		password=#{password},
+		sex=#{sex},
+		age=#{age},
+		taste=#{taste},
+		address=#{address},
+		phone =#{phone},
+		email=#{email},
+		lovenum =#{lovenum},
+		rid=#{rid}
+		where uid=#{uid}
+	</update>
+	
+	<delete id="delete" parameterType="User">
+		delete from umuser where uid = #{uid}
+	</delete>
+	
+</mapper> 
